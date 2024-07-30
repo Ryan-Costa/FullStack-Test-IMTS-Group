@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GetApartmentsWithVehiclesService } from "../services/GetApartmentWithVehiclesService";
+import { GetApartmentsWithVehiclesService } from "../../services/apartment/GetApartmentWithVehiclesService";
 
 export class GetApartmentsWithVehiclesController {
   async handle(request: Request, response: Response): Promise<Response> {

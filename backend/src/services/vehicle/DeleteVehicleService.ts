@@ -1,5 +1,5 @@
-import { AppDataSource } from "../data-source";
-import { Vehicle } from "../entities/Vehicle";
+import { AppDataSource } from "../../data-source";
+import { Vehicle } from "../../entities/Vehicle";
 
 export class DeleteVehicleService {
   async execute(id: number): Promise<string | Error> {

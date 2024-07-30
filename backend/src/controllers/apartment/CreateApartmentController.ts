@@ -1,18 +1,15 @@
 import { Request, Response } from "express";
-import { UpdateApartmentService } from "../services/UpdateApartmentService";
+import { CreateApartmentService } from "../../services/apartment/CreateApartmentService";
 
-export class UpdateApartmentController {
+export class CreateApartmentController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
     const { block, apartmentNumber, resident, phone, email } = request.body;
 
-    const service = new UpdateApartmentService();
+    const service = new CreateApartmentService();
 
     const result = await service.execute({
-      id: Number(id),
-      block: block !== undefined ? Number(block) : undefined,
-      apartmentNumber:
-        apartmentNumber !== undefined ? Number(apartmentNumber) : undefined,
+      block,
+      apartmentNumber,
       resident,
       phone,
       email,

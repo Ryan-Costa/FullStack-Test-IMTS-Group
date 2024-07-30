@@ -1,5 +1,5 @@
-import { Apartment } from "../entities/Apartment";
-import { AppDataSource } from "../data-source";
+import { Apartment } from "../../entities/Apartment";
+import { AppDataSource } from "../../data-source";
 
 type ApartmentRequest = {
   block: number;

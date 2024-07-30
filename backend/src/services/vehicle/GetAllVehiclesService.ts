@@ -1,5 +1,5 @@
-import { AppDataSource } from "../data-source";
-import { Vehicle } from "../entities/Vehicle";
+import { AppDataSource } from "../../data-source";
+import { Vehicle } from "../../entities/Vehicle";
 
 export class GetAllVehiclesService {
   async execute(): Promise<Vehicle[]> {

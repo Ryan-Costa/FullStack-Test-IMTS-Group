@@ -1,9 +1,16 @@
 import { Request, Response } from "express";
-import { CreateVehicleService } from "../services/CreateVehicleService";
+import { CreateVehicleService } from "../../services/vehicle/CreateVehicleService";
+import { ValidatePlateService } from "../../services/vehicle/ValidatePlateService";
 
 export class CreateVehicleController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { brand, model, color, plate, apartment_id } = request.body;
+
+    const plateValidate = new ValidatePlateService();
+
+    if (!(await plateValidate.execute(plate))) {
+      return response.status(400).json("Invalid plate format");
+    }
 
     const service = new CreateVehicleService();
 

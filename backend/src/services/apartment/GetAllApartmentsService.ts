@@ -1,5 +1,5 @@
-import { AppDataSource } from "../data-source";
-import { Apartment } from "../entities/Apartment";
+import { AppDataSource } from "../../data-source";
+import { Apartment } from "../../entities/Apartment";
 
 export class GetAllApartmentService {
   async execute(): Promise<Apartment[]> {

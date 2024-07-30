@@ -1,6 +1,6 @@
-import { AppDataSource } from "../data-source";
-import { Apartment } from "../entities/Apartment";
-import { Vehicle } from "../entities/Vehicle";
+import { AppDataSource } from "../../data-source";
+import { Apartment } from "../../entities/Apartment";
+import { Vehicle } from "../../entities/Vehicle";
 
 type VehicleRequest = {
   id: number;
