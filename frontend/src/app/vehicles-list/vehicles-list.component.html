@@ -1,0 +1,21 @@
+<p-table [value]="vehicles">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Apartamento</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Cor</th>
+        <th>Placa</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-vehicle>
+      <tr>
+        <td>{{ vehicle.apartamento }}</td>
+        <td>{{ vehicle.marca }}</td>
+        <td>{{ vehicle.modelo }}</td>
+        <td>{{ vehicle.cor }}</td>
+        <td>{{ vehicle.placa }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  

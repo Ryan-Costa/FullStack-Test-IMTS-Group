@@ -1,0 +1,19 @@
+<p-table [value]="apartments()">
+    <ng-template pTemplate="header">
+      <tr>
+    <th>Morador</th>
+        <th>Bloco</th>
+        <th>Apartamento</th>
+        <th>Telefone</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-apartament>
+      <tr>
+        <td>{{ apartament.resident }}</td>
+        <td>{{ apartament.block }}</td>
+        <td>{{ apartament.apartmentNumber }}</td>
+        <td>{{ apartament.phone }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  
