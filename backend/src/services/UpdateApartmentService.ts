@@ -2,7 +2,7 @@ import { AppDataSource } from "../data-source";
 import { Apartment } from "../entities/Apartment";
 
 type ApartmentUpdateRequest = {
-  id: string;
+  id: number;
   block: number;
   apartmentNumber: number;
   resident: string;
@@ -24,7 +24,19 @@ export class UpdateApartmentService {
     const apartment = await repo.findOne({ where: { id } });
 
     if (!apartment) {
-      return new Error("Apartment not found");
+      return new Error("Apartment does not exist");
+    }
+
+    if (block !== undefined && apartmentNumber !== undefined) {
+      const existingApartment = await repo.findOne({
+        where: { block, apartmentNumber },
+      });
+
+      if (existingApartment && existingApartment.id !== id) {
+        return new Error(
+          "An apartment with the same block and number already exists"
+        );
+      }
     }
 
     if (block !== undefined) apartment.block = block;

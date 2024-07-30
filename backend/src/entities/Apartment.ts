@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid";
 
 @Entity()
 export class Apartment {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   block: number;
@@ -34,10 +34,4 @@ export class Apartment {
 
   @OneToMany(() => Vehicle, (vehicle) => vehicle.apartment)
   vehicles: Vehicle[];
-
-  constructor() {
-    if (!this.id) {
-      this.id = uuid();
-    }
-  }
 }

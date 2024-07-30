@@ -14,13 +14,14 @@ export class CreateVehicle1722289239874 implements MigrationInterface {
         columns: [
           {
             name: "id",
-            type: "uuid",
+            type: "int",
             isPrimary: true,
             isGenerated: true,
+            generationStrategy: "increment",
           },
           {
             name: "apartment_id",
-            type: "uuid",
+            type: "int",
           },
           {
             name: "brand",

@@ -7,13 +7,12 @@ import {
   Unique,
 } from "typeorm";
 import { Apartment } from "./Apartment";
-import { v4 as uuid } from "uuid";
 
 @Entity()
 @Unique(["plate"])
 export class Vehicle {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @ManyToOne(() => Apartment, (apartment) => apartment.vehicles, {
     onDelete: "CASCADE",
@@ -34,9 +33,13 @@ export class Vehicle {
   @Column({ type: "varchar", length: 7 })
   plate: string;
 
-  constructor() {
-    if (!this.id) {
-      this.id = uuid();
-    }
-  }
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  createdAt: Date;
+
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+    onUpdate: "CURRENT_TIMESTAMP",
+  })
+  updatedAt: Date;
 }

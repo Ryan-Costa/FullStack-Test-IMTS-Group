@@ -8,8 +8,10 @@ export class CreateApartment1722287677910 implements MigrationInterface {
         columns: [
           {
             name: "id",
-            type: "uuid",
+            type: "int",
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: "increment",
           },
           {
             name: "block",
@@ -33,6 +35,7 @@ export class CreateApartment1722287677910 implements MigrationInterface {
             name: "email",
             type: "varchar",
             length: "100",
+            isNullable: true,
           },
           {
             name: "createdAt",

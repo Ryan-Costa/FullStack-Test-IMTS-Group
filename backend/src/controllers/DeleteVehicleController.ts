@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { DeleteApartmentService } from "../services/DeleteApartmentService";
+import { DeleteVehicleService } from "../services/DeleteVehicleService";
 
-export class DeleteApartmentController {
+export class DeleteVehicleController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const service = new DeleteApartmentService();
+    const service = new DeleteVehicleService();
 
     const result = await service.execute(Number(id));
 
@@ -15,6 +15,6 @@ export class DeleteApartmentController {
 
     return response
       .status(200)
-      .json({ message: `Apartment with ID ${id} deleted successfully.` });
+      .json({ message: `Vehicle with ID ${id} deleted successfully.` });
   }
 }

@@ -9,9 +9,10 @@ export class UpdateApartmentController {
     const service = new UpdateApartmentService();
 
     const result = await service.execute({
-      id,
-      block,
-      apartmentNumber,
+      id: Number(id),
+      block: block !== undefined ? Number(block) : undefined,
+      apartmentNumber:
+        apartmentNumber !== undefined ? Number(apartmentNumber) : undefined,
       resident,
       phone,
       email,
