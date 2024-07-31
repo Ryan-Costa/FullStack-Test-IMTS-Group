@@ -3,13 +3,13 @@ import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-header',
   standalone: true,
   imports: [PanelMenuModule],
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class HeaderComponent implements OnInit {
   items: MenuItem[] = [];
 
   ngOnInit() {

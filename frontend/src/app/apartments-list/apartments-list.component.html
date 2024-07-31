@@ -1,19 +1,147 @@
-<p-table [value]="apartments()">
-    <ng-template pTemplate="header">
-      <tr>
-    <th>Morador</th>
-        <th>Bloco</th>
-        <th>Apartamento</th>
-        <th>Telefone</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-apartament>
-      <tr>
-        <td>{{ apartament.resident }}</td>
-        <td>{{ apartament.block }}</td>
-        <td>{{ apartament.apartmentNumber }}</td>
-        <td>{{ apartament.phone }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-  
+<h1>Apartamentos</h1>
+
+<div class="table-container">
+    <p-table
+        #dt
+        [value]="$apartments"
+        dataKey="id"
+        [rowHover]="true"
+        [rows]="15"
+        [showCurrentPageReport]="true"
+        [paginator]="true"
+        currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} registros"
+        [filterDelay]="0"
+        [rowsPerPageOptions]="[15]"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between">
+                <p-button 
+                    severity="success" 
+                    label="Adicionar Apartamento" 
+                    icon="pi pi-plus" 
+                    class="mr-2"  
+                    (onClick)="newApartment()"
+                />  
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="block" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Bloco
+                    </div>
+                </th>
+                <th pSortableColumn="apartmentNumber" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        N Apartamento
+                    </div>
+                </th>
+                <th pSortableColumn="resident" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Morador
+                    </div>
+                </th>
+                <th pSortableColumn="phone" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Telefone
+                    </div>
+                </th>
+                <th pSortableColumn="email" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+                        E-mail
+                    </div>
+                </th>
+                <th pSortableColumn="plate" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Data de Criação
+                    </div>
+                </th>
+                <th pSortableColumn="plate" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Data de Edição
+                    </div>
+                </th>
+                <th pSortableColumn="plate" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Ações
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+
+       
+
+        <ng-template pTemplate="body" let-apartment>
+            <tr class="p-selectable-row">
+                <td>
+                    <span class="p-column-title">Bloco</span>
+                    {{ apartment.block }}
+                </td>
+                <td>
+                    <span class="p-column-title">N AP</span>
+                    {{ apartment.apartmentNumber }}
+                </td>
+                <td>
+                    <span class="p-column-title">Morador</span>
+                    {{ apartment.resident }}
+                </td>
+                <td>
+                    <span class="p-column-title">Telefone</span>
+                    {{ apartment.phone }}
+                </td>
+                <td>
+                    <span class="p-column-title">E-mail</span>
+                    {{ apartment.email }}
+                </td>
+                <td>
+                    <span class="p-column-title">Data de Criação</span>
+                    {{ apartment.createdAt | date : 'MM/dd/yyyy' }}
+                </td>
+                <td>
+                    <span class="p-column-title">Data de Edição</span>
+                    {{ apartment.updatedAt | date : 'MM/dd/yyyy'  }}
+                </td>
+                <td style="text-align: left">
+                    <p-button 
+                        title="Adicionar Veiculo"
+                        icon="pi pi-plus" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        severity="success" 
+                        (onClick)="addVehicle(apartment.id)" 
+                    />
+
+                    <p-button 
+                        title="Editar Apartamento"
+                        icon="pi pi-pencil" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        severity="success" 
+                        (onClick)="editApartment()" 
+                    />
+
+                    <p-button 
+                        title="Excluir Apartamento"
+                        icon="pi pi-trash" 
+                        severity="danger" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        (onClick)="deleteApartment(apartment.id)"
+                    />
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">Nenhum apartamento encontrado</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<app-modal-create-apartment [visible]="modalCreateVisible" (onCreate)="createApartment($event)"  (onClose)="closeModal()"></app-modal-create-apartment>
+<app-modal-update-apartment [visible]="modalEditVisible" (onEdit)="updateApartment($event)"  (onClose)="closeModal()"></app-modal-update-apartment>

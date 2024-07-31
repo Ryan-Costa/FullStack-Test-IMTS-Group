@@ -1,35 +1,78 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import { VehiclesService } from './vehicles-list.service';
+import { Title } from '@angular/platform-browser';
+import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { VehicleCreate, VehicleRequest } from '../model/models';
+import { DialogModule } from 'primeng/dialog';
+// import { ModalCreateVehicleComponent } from '../modal-create-vehicle/modal-create-vehicle.component';
 
 @Component({
   selector: 'app-vehicles-list',
   standalone: true,
+  imports: [
+    CommonModule,
+    ButtonModule,
+    TableModule,
+    InputIconModule,
+    FormsModule,
+    InputTextModule,
+    DialogModule,
+    // ModalCreateVehicleComponent,
+  ],
   templateUrl: './vehicles-list.component.html',
-  styleUrls: ['./vehicles-list.component.scss'],
-  imports: [TableModule],
+  styleUrl: './vehicles-list.component.scss',
 })
 export class VehiclesListComponent implements OnInit {
-  vehicles = [
-    {
-      id: 1,
-      apartamento: '101',
-      marca: 'Toyota',
-      modelo: 'Corolla',
-      cor: 'Preto',
-      placa: 'ABC-1234',
-    },
-    {
-      id: 2,
-      apartamento: '202',
-      marca: 'Honda',
-      modelo: 'Civic',
-      cor: 'Branco',
-      placa: 'DEF-5678',
-    },
-    // Adicione mais veículos conforme necessário
-  ];
+  title = 'Veículos';
+  titleService = inject(Title);
+  modalVisible: boolean = false;
 
-  constructor() {}
+  vehiclesService = inject(VehiclesService);
+  $vehicles: VehicleRequest[] = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.titleService.setTitle(`IMTS | ${this.title}`);
+    this.getVehicles();
+  }
+
+  getVehicles(): void {
+    this.vehiclesService.getVehicles().subscribe({
+      next: (vehicles) => {
+        this.$vehicles = vehicles ?? [];
+      },
+      error: (error) => console.error('Error:', error),
+    });
+  }
+
+  formatDate(date: string): Date {
+    const [day, month, year] = date.split('/');
+    return new Date(+year, +month - 1, +day);
+  }
+
+  showModal(): void {
+    this.modalVisible = true;
+  }
+
+  closeModal(): void {
+    this.modalVisible = false;
+  }
+
+  updateVahicle(vehicle: any): void {
+    console.log('edit vehicle', vehicle);
+  }
+
+  deleteVehicle(vehicle: any): void {
+    console.log('delete vehicle', vehicle);
+  }
 }

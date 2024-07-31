@@ -1,0 +1,32 @@
+<div class="modal-overlay" [class.show]="visible" (click)="closeModal()"></div>
+    <div class="modal-content" [class.show]="visible">
+        <div class="modal-header">
+            <h2>Adicionar Apartamento</h2>
+            <button (click)="closeModal()"><i class="pi pi-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <label for="brand">Bloco:</label>
+                <input id="brand" [(ngModel)]="apartmentCreate.block" type="text" />
+            </div>
+            <div>
+                <label for="brand">Apartamento:</label>
+                <input id="brand" [(ngModel)]="apartmentCreate.apartmentNumber" type="text" />
+            </div>
+            <div>
+                <label for="model">Morador:</label>
+                <input id="model" [(ngModel)]="apartmentCreate.resident" type="text" />
+            </div>
+            <div>
+                <label for="color">Email:</label>
+                <input id="color" [(ngModel)]="apartmentCreate.email" type="text" />
+            </div>
+            <div>
+                <label for="plate">Telefone:</label>
+                <input id="plate" [(ngModel)]="apartmentCreate.phone" type="text" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="createApartment()">Criar</button>
+        </div>
+    </div>
