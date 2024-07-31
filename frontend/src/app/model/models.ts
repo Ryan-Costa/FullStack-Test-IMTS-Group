@@ -61,4 +61,4 @@ export type ApartmentEdit = {
   resident: string;
   phone: string;
   email?: string | null;
-} | null;
+};

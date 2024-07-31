@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  effect,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  ApartmentCreate,
   ApartmentEdit,
-  ApartmentRequest,
   ApartmentRequestWithoutTimestemp,
-  VehicleCreate,
 } from '../model/models';
+import { ModalUpdateApartmentService } from './modal-update-apartment.service';
 
 @Component({
   selector: 'app-modal-update-apartment',
@@ -19,19 +24,21 @@ import {
 export class ModalUpdateApartmentComponent {
   @Input() visible: boolean = false;
 
-  @Input() apartmentEdit: ApartmentEdit = {
-    id: '',
-    block: '',
-    apartmentNumber: '',
-    resident: '',
-    phone: '',
-    email: '',
-  };
   @Output() onClose = new EventEmitter<void>();
   @Output() onEdit = new EventEmitter<ApartmentRequestWithoutTimestemp>();
 
+  modalUpdateService = inject(ModalUpdateApartmentService);
+  apartmentEditSignal = this.modalUpdateService.apartmentData;
+  apartmentEdit: ApartmentEdit = {} as ApartmentEdit;
+
+  constructor() {
+    effect(() => {
+      this.apartmentEdit = this.apartmentEditSignal();
+    });
+  }
+
   closeModal() {
-    this.onClose.emit();
+    this.modalUpdateService.closeModal();
   }
 
   updateApartment() {

@@ -10,13 +10,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import {
   ApartmentCreate,
+  ApartmentEdit,
   ApartmentRequest,
   ApartmentRequestWithoutTimestemp,
 } from '../model/models';
 import { ModalCreateApartmentComponent } from '../modal-create-apartment/modal-create-apartment.component';
 import { ModalUpdateApartmentComponent } from '../modal-update-apartment/modal-update-apartment.component';
-// import { VehiclesService } from '../vehicles-list/vehicles-list.service';
-// import { ModalCreateApartmentComponent } from '../modal-create-apartment/modal-create-apartment.component';
+import { ModalUpdateApartmentService } from '../modal-update-apartment/modal-update-apartment.service';
 
 @Component({
   selector: 'app-apartaments-list',
@@ -39,12 +39,15 @@ export class ApartamentsListComponent implements OnInit {
   title = 'Apartamentos';
   titleService = inject(Title);
 
+  apartamentsService = inject(ApartamentsService);
+  modalUpdateService = inject(ModalUpdateApartmentService);
+
+  modalEditVisible = this.modalUpdateService.modalEditVisible;
   modalCreateVisible: boolean = false;
-  modalEditVisible: boolean = false;
   modalAddVehicleVisible: boolean = false;
 
-  apartamentsService = inject(ApartamentsService);
   // vehiclesService = inject(VehiclesService);
+
   $apartments: ApartmentRequest[] = [];
 
   ngOnInit(): void {
@@ -78,7 +81,7 @@ export class ApartamentsListComponent implements OnInit {
         alert('Apartamento atualizado');
         this.getApartments();
       },
-      error: (error) => console.error('Error:', error),
+      error: (error) => console.log('Error:', error),
     });
   }
 
@@ -94,7 +97,6 @@ export class ApartamentsListComponent implements OnInit {
 
   closeModal(): void {
     this.modalCreateVisible = false;
-    this.modalEditVisible = false;
     this.modalAddVehicleVisible = false;
   }
 
@@ -103,18 +105,13 @@ export class ApartamentsListComponent implements OnInit {
     console.log('new apartment');
   }
 
-  editApartment(): void {
-    this.modalEditVisible = true;
-    console.log('edit apartment');
+  editApartment(apartment: ApartmentEdit): void {
+    this.modalUpdateService.openModal(apartment);
   }
 
   addVehicle(apartment_id: number): void {
     this.modalAddVehicleVisible = true;
   }
-
-  // deleteApartment(apartment: any): void {
-  //   console.log('delete vehicle', apartment);
-  // }
 
   formatDate(date: Date): string {
     return new Date(date).toLocaleDateString();

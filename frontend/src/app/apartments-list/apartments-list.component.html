@@ -120,7 +120,7 @@
                         [rounded]="true" 
                         [outlined]="true" 
                         severity="success" 
-                        (onClick)="editApartment()" 
+                        (onClick)="editApartment(apartment)" 
                     />
 
                     <p-button 
@@ -144,4 +144,5 @@
 </div>
 
 <app-modal-create-apartment [visible]="modalCreateVisible" (onCreate)="createApartment($event)"  (onClose)="closeModal()"></app-modal-create-apartment>
-<app-modal-update-apartment [visible]="modalEditVisible" (onEdit)="updateApartment($event)"  (onClose)="closeModal()"></app-modal-update-apartment>
+
+<app-modal-update-apartment [visible]="modalEditVisible()" (onEdit)="updateApartment($event)"  (onClose)="closeModal()"></app-modal-update-apartment>
