@@ -29,15 +29,20 @@
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
+    gap: 1.4rem;
     width: 450px;
 
-    div {
-        label {
-            font-size: 24px;
-        }
-        input {
-            padding: 4px 6px;
-        }
+    .block-ap {
+      display: flex;
+      gap: 1rem;
+    }
+
+    p-floatLabel {
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
     }
   }
   
@@ -48,6 +53,22 @@
     cursor: pointer;
   }
 
+  .modal-footer {
+    width: 100%;
+    margin-top: 2rem;
+
+    
+    button {
+      background-color: #2b58de;
+      color: white;
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      font-size: 1.5rem;
+      width: 100%;
+    }
+
+  }
+
   .modal-overlay, .modal-content {
     display: none;
   }
@@ -55,4 +76,5 @@
   .modal-overlay.show, .modal-content.show {
     display: block;
   }
+
   

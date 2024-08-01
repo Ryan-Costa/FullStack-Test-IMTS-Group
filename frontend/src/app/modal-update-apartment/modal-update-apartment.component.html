@@ -1,30 +1,36 @@
 <div class="modal-overlay" [class.show]="visible" (click)="closeModal()"></div>
     <div class="modal-content" [class.show]="visible">
         <div class="modal-header">
-            <h2> Apartamento</h2>
+            <h2>Editar Apartamento {{apartmentEdit.apartmentNumber}}</h2>
             <button (click)="closeModal()"><i class="pi pi-times"></i></button>
         </div>
         <div class="modal-body">
-            <div>
-                <label for="block">Bloco:</label>
-                <input id="block" [(ngModel)]="apartmentEdit.block" type="text" />
+            <div class="block-ap">
+                <p-floatLabel>
+                    <input pInputText id="block" [(ngModel)]="apartmentEdit.block" />
+                    <label for="block">Bloco:</label>
+                </p-floatLabel>
+    
+                <p-floatLabel>
+                    <input pInputText id="apartmentNumber" [(ngModel)]="apartmentEdit.apartmentNumber" />
+                    <label for="apartmentNumber">Apartamento:</label>
+                </p-floatLabel>
             </div>
-            <div>
-                <label for="apartmentNumber">Apartamento:</label>
-                <input id="apartmentNumber" [(ngModel)]="apartmentEdit.apartmentNumber" type="text" />
-            </div>
-            <div>
+
+            <p-floatLabel>
+                <input pInputText id="resident" [(ngModel)]="apartmentEdit.resident" />
                 <label for="resident">Morador:</label>
-                <input id="resident" [(ngModel)]="apartmentEdit.resident" type="text" />
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input id="email" [(ngModel)]="apartmentEdit.email" type="text" />
-            </div>
-            <div>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="email" [(ngModel)]="apartmentEdit.email" />
+                <label for="email">E-mail:</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="phone" [(ngModel)]="apartmentEdit.phone" mask="(00) 00000-0000" maxlength="15" />
                 <label for="phone">Telefone:</label>
-                <input id="phone" [(ngModel)]="apartmentEdit.phone" type="text" />
-            </div>
+            </p-floatLabel>
         </div>
         <div class="modal-footer">
             <button (click)="updateApartment()">Criar</button>

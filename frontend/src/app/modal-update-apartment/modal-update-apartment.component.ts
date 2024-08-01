@@ -13,13 +13,25 @@ import {
   ApartmentRequestWithoutTimestemp,
 } from '../model/models';
 import { ModalUpdateApartmentService } from './modal-update-apartment.service';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { ButtonModule } from 'primeng/button';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-modal-update-apartment',
   standalone: true,
   templateUrl: './modal-update-apartment.component.html',
   styleUrls: ['./modal-update-apartment.component.scss'],
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    InputTextModule,
+    FloatLabelModule,
+    ButtonModule,
+    NgxMaskDirective,
+  ],
+  providers: [provideNgxMask()],
 })
 export class ModalUpdateApartmentComponent {
   @Input() visible: boolean = false;

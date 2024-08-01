@@ -4,6 +4,12 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { IConfig } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: true,
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,5 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withFetch()),
+    provideEnvironmentNgxMask(maskConfig),
   ],
 };
