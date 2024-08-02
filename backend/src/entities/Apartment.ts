@@ -1,25 +1,24 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Vehicle } from "./Vehicle";
-import { v4 as uuid } from "uuid";
 
 @Entity()
 export class Apartment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "integer" })
   block: number;
 
-  @Column()
+  @Column({ type: "integer" })
   apartmentNumber: number;
 
-  @Column({ length: 150 })
+  @Column({ length: 150, type: "varchar" })
   resident: string;
 
-  @Column({ length: 13 })
+  @Column({ length: 13, type: "varchar" })
   phone: string;
 
-  @Column({ length: 100, nullable: true })
+  @Column({ length: 100, nullable: true, type: "varchar" })
   email?: string;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
