@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, makeStateKey, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ApartamentsService } from './apartaments-list.service';
+import { ApartamentsService } from './apartments-list.service';
 import { TableModule } from 'primeng/table';
 import { InputIconModule } from 'primeng/inputicon';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,8 @@ import {
 import { ModalCreateApartmentComponent } from '../modal-create-apartment/modal-create-apartment.component';
 import { ModalUpdateApartmentComponent } from '../modal-update-apartment/modal-update-apartment.component';
 import { ModalUpdateApartmentService } from '../modal-update-apartment/modal-update-apartment.service';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apartaments-list',
@@ -31,7 +33,9 @@ import { ModalUpdateApartmentService } from '../modal-update-apartment/modal-upd
     DialogModule,
     ModalCreateApartmentComponent,
     ModalUpdateApartmentComponent,
+    NgxMaskDirective,
   ],
+  providers: [provideNgxMask()],
   templateUrl: './apartments-list.component.html',
   styleUrl: './apartments-list.component.scss',
 })
@@ -47,6 +51,8 @@ export class ApartamentsListComponent implements OnInit {
   modalAddVehicleVisible: boolean = false;
 
   // vehiclesService = inject(VehiclesService);
+
+  constructor(private router: Router) {}
 
   $apartments: ApartmentRequest[] = [];
 
@@ -115,5 +121,14 @@ export class ApartamentsListComponent implements OnInit {
 
   formatDate(date: Date): string {
     return new Date(date).toLocaleDateString();
+  }
+
+  phoneMask(phone: string): string {
+    return makeStateKey(phone);
+  }
+
+  onRowClick(id: number) {
+    this.router.navigate(['/apartment', id]);
+    console.log('Clicado no apartamento com ID:', id);
   }
 }

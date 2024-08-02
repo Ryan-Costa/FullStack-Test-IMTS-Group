@@ -12,3 +12,9 @@
         width: 80%;
     }
 }
+
+.p-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
