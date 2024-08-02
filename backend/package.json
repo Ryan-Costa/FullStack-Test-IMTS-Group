@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --transpile-only src/server.ts",
     "build": "tsup src",
     "start": "node dist/server.js",
+    "migration:run": "tsc && typeorm-ts-node-commonjs migration:run -d dist/data-source.js",
     "typeorm": "ts-node-dev node_modules/.bin/typeorm"
   },
   "dependencies": {
