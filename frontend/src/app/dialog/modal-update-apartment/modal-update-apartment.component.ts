@@ -8,15 +8,15 @@ import {
   effect,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  ApartmentEdit,
-  ApartmentRequestWithoutTimestemp,
-} from '../model/models';
 import { ModalUpdateApartmentService } from './modal-update-apartment.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import {
+  ApartmentEdit,
+  ApartmentRequestWithoutTimestemp,
+} from '../../model/models';
 
 @Component({
   selector: 'app-modal-update-apartment',

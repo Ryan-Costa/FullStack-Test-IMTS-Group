@@ -1,0 +1,34 @@
+<div class="modal-overlay" [class.show]="visible" (click)="closeModal()"></div>
+    <div class="modal-content" [class.show]="visible">
+        <div class="modal-header">
+            <h2>Adicionar Veículo ao AP {{ apartmentNumber }}</h2>
+            <button (click)="closeModal()"><i class="pi pi-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="block-ap">
+                <p-floatLabel>
+                    <input pInputText id="block" [(ngModel)]="vehicleCreate.brand" />
+                    <label for="block">Marca:</label>
+                </p-floatLabel>
+    
+                <p-floatLabel>
+                    <input pInputText id="apartmentNumber" [(ngModel)]="vehicleCreate.model" />
+                    <label for="apartmentNumber">Modelo:</label>
+                </p-floatLabel>
+            </div>
+
+            <p-floatLabel>
+                <input pInputText id="resident" [(ngModel)]="vehicleCreate.color" />
+                <label for="resident">Cor:</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="plate" [(ngModel)]="vehicleCreate.plate" mask="SSS-0000||SSS-0S00" />
+                <label for="plate">Placa do veículo</label>
+            </p-floatLabel>
+           
+        </div>
+        <div class="modal-footer">
+            <button (click)="createVehicle()">Criar</button>
+        </div>
+    </div>

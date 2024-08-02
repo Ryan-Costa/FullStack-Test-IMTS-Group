@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { Component, inject, makeStateKey, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  makeStateKey,
+  OnInit,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ApartamentsService } from './apartments-list.service';
 import { TableModule } from 'primeng/table';
@@ -13,12 +21,16 @@ import {
   ApartmentEdit,
   ApartmentRequest,
   ApartmentRequestWithoutTimestemp,
+  VehicleCreate,
 } from '../model/models';
-import { ModalCreateApartmentComponent } from '../modal-create-apartment/modal-create-apartment.component';
-import { ModalUpdateApartmentComponent } from '../modal-update-apartment/modal-update-apartment.component';
-import { ModalUpdateApartmentService } from '../modal-update-apartment/modal-update-apartment.service';
+import { ModalCreateApartmentComponent } from '../dialog/modal-create-apartment/modal-create-apartment.component';
+import { ModalUpdateApartmentComponent } from '../dialog/modal-update-apartment/modal-update-apartment.component';
+import { ModalUpdateApartmentService } from '../dialog/modal-update-apartment/modal-update-apartment.service';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Router } from '@angular/router';
+import { VehiclesService } from '../vehicles-list/vehicles-list.service';
+import { ModalCreateVehicleComponent } from '../dialog/modal-create-vehicle/modal-create-vehicle.component';
+import { ModalCreateVehicleService } from '../dialog/modal-create-vehicle/modal-create-vehicle.service';
 
 @Component({
   selector: 'app-apartaments-list',
@@ -33,6 +45,7 @@ import { Router } from '@angular/router';
     DialogModule,
     ModalCreateApartmentComponent,
     ModalUpdateApartmentComponent,
+    ModalCreateVehicleComponent,
     NgxMaskDirective,
   ],
   providers: [provideNgxMask()],
@@ -44,13 +57,15 @@ export class ApartamentsListComponent implements OnInit {
   titleService = inject(Title);
 
   apartamentsService = inject(ApartamentsService);
-  modalUpdateService = inject(ModalUpdateApartmentService);
+  modalUpdateApartmentService = inject(ModalUpdateApartmentService);
+  vehiclesService = inject(VehiclesService);
+  modalCreateVehicleService = inject(ModalCreateVehicleService);
 
-  modalEditVisible = this.modalUpdateService.modalEditVisible;
   modalCreateVisible: boolean = false;
-  modalAddVehicleVisible: boolean = false;
+  modalEditApartmentVisible = this.modalUpdateApartmentService.modalEditVisible;
+  modalAddVehicleVisible = this.modalCreateVehicleService.modalAddVisible;
 
-  // vehiclesService = inject(VehiclesService);
+  apartmentNumber: WritableSignal<string> = signal('');
 
   constructor(private router: Router) {}
 
@@ -64,7 +79,6 @@ export class ApartamentsListComponent implements OnInit {
   getApartments(): void {
     this.apartamentsService.getApartments().subscribe({
       next: (apartments) => {
-        console.log('apartments', apartments);
         this.$apartments = apartments ?? [];
       },
       error: (error) => console.error('Error:', error),
@@ -91,7 +105,8 @@ export class ApartamentsListComponent implements OnInit {
     });
   }
 
-  deleteApartment(apartment_id: number): void {
+  deleteApartment(apartment_id: number, event: MouseEvent): void {
+    event.stopPropagation();
     this.apartamentsService.deleteApartment(apartment_id).subscribe({
       next: () => {
         alert('Apartamento excluído');
@@ -103,7 +118,6 @@ export class ApartamentsListComponent implements OnInit {
 
   closeModal(): void {
     this.modalCreateVisible = false;
-    this.modalAddVehicleVisible = false;
   }
 
   newApartment(): void {
@@ -111,12 +125,19 @@ export class ApartamentsListComponent implements OnInit {
     console.log('new apartment');
   }
 
-  editApartment(apartment: ApartmentEdit): void {
-    this.modalUpdateService.openModal(apartment);
+  addVehicle(
+    apartmentId: string,
+    apartmentNumber: string,
+    event: MouseEvent
+  ): void {
+    event.stopPropagation();
+    this.modalCreateVehicleService.openModal(apartmentId, apartmentNumber);
+    this.apartmentNumber.set(apartmentNumber);
   }
 
-  addVehicle(apartment_id: number): void {
-    this.modalAddVehicleVisible = true;
+  editApartment(apartment: ApartmentEdit, event: MouseEvent): void {
+    event.stopPropagation();
+    this.modalUpdateApartmentService.openModal(apartment);
   }
 
   formatDate(date: Date): string {

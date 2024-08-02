@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { VehicleCreate, VehicleRequest } from '../model/models';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { VehicleCreate, VehicleRequest } from '../model/models';
 export class VehiclesService {
   constructor() {}
 
-  private apiUrl = 'http://localhost:3000/vehicles';
+  private apiUrl = `${environment.api}/vehicles`;
 
   http = inject(HttpClient);
 
@@ -30,4 +31,6 @@ export class VehiclesService {
   deleteVehicle(vehicle: VehicleRequest) {
     return this.http.delete<VehicleRequest>(`${this.apiUrl}/${vehicle.id}`);
   }
+
+  // openModalAddVehicle();
 }

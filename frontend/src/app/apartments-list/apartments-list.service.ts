@@ -6,6 +6,7 @@ import {
   ApartmentRequestWithoutTimestemp,
   VehicleCreate,
 } from '../model/models';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ import {
 export class ApartamentsService {
   constructor() {}
 
-  private apiUrl = 'http://localhost:3000/apartments';
+  private apiUrl = `${environment.api}/apartments`;
 
   http = inject(HttpClient);
 

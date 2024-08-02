@@ -1,11 +1,3 @@
-export type VehicleCreate = {
-  brand: string;
-  model: string;
-  color: string;
-  plate: string;
-  apartmentNumber: string;
-};
-
 export type VehicleRequest = {
   id: number;
   brand: string;
@@ -24,6 +16,29 @@ export type VehicleRequest = {
     createdAt: Date;
     updatedAt: Date;
   };
+};
+
+export type VehicleWithoutApId = {
+  brand: string;
+  model: string;
+  color: string;
+  plate: string;
+};
+
+export type VehicleCreate = {
+  brand: string;
+  model: string;
+  color: string;
+  plate: string;
+  apartmentId: number;
+};
+
+export type VehicleEdit = {
+  brand: string;
+  model: string;
+  color: string;
+  plate: string;
+  apartmentId: string;
 };
 
 export type ApartmentRequest = {

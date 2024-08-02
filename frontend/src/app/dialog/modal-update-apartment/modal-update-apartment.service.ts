@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { ApartmentEdit, ApartmentRequest } from '../model/models';
+import { ApartmentEdit } from '../../model/models';
 
 @Injectable({
   providedIn: 'root',
