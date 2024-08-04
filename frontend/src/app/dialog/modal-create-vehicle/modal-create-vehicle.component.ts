@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { VehicleCreate } from '../../model/models';
+import { VehicleCreate, VehiclePost } from '../../model/models';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
@@ -26,12 +26,13 @@ import { ModalCreateVehicleService } from './modal-create-vehicle.service';
 export class ModalCreateVehicleComponent {
   @Input() visible: boolean = false;
   @Input() apartmentNumber: string = '';
+  @Input() apartmentId: string = '';
   @Input() vehicleCreate: VehicleCreate = {
     brand: '',
     model: '',
     color: '',
     plate: '',
-    apartmentId: 0,
+    apartment_id: 0,
   };
 
   @Output() onClose = new EventEmitter<void>();
@@ -46,6 +47,8 @@ export class ModalCreateVehicleComponent {
   createVehicle() {
     const vehicleToSubmit = {
       ...this.vehicleCreate,
+      plate: this.vehicleCreate.plate.toUpperCase(),
+      apartment_id: Number(this.apartmentId),
     };
 
     this.onCreate.emit(vehicleToSubmit);

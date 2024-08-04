@@ -55,6 +55,20 @@ export class VehiclesListComponent implements OnInit {
     });
   }
 
+  updateVahicle(vehicle: any): void {
+    console.log('edit vehicle', vehicle);
+  }
+
+  deleteVehicle(vehicleId: any): void {
+    this.vehiclesService.deleteVehicle(vehicleId).subscribe({
+      next: () => {
+        alert('Veículo excluído com sucesso!');
+        this.getVehicles();
+      },
+      error: (error) => console.error('Error:', error),
+    });
+  }
+
   formatDate(date: string): Date {
     const [day, month, year] = date.split('/');
     return new Date(+year, +month - 1, +day);
@@ -66,13 +80,5 @@ export class VehiclesListComponent implements OnInit {
 
   closeModal(): void {
     this.modalVisible = false;
-  }
-
-  updateVahicle(vehicle: any): void {
-    console.log('edit vehicle', vehicle);
-  }
-
-  deleteVehicle(vehicle: any): void {
-    console.log('delete vehicle', vehicle);
   }
 }

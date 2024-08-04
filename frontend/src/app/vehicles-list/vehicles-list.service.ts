@@ -17,7 +17,7 @@ export class VehiclesService {
     return this.http.get<VehicleRequest[]>(this.apiUrl);
   }
 
-  addVehicle(vehicle: VehicleCreate) {
+  createVehicle(vehicle: VehicleCreate) {
     return this.http.post<VehicleCreate>(this.apiUrl, vehicle);
   }
 
@@ -28,8 +28,8 @@ export class VehiclesService {
     );
   }
 
-  deleteVehicle(vehicle: VehicleRequest) {
-    return this.http.delete<VehicleRequest>(`${this.apiUrl}/${vehicle.id}`);
+  deleteVehicle(vehicleId: string) {
+    return this.http.delete<VehicleRequest>(`${this.apiUrl}/${vehicleId}`);
   }
 
   // openModalAddVehicle();

@@ -5,16 +5,14 @@ import { Injectable, signal } from '@angular/core';
 })
 export class ModalCreateVehicleService {
   modalAddVisible = signal(false);
-  //   apartmentId = signal({} as string);
+  // apartmentId = signal({} as string);
 
   constructor() {}
   closeModal(): void {
     this.modalAddVisible.set(false);
   }
 
-  openModal(apartmentId: string, apartmentNumber: string): void {
+  openModal(): void {
     this.modalAddVisible.set(true);
-    console.log('criar veiculo no ap ', apartmentNumber);
-    // this.apartmentData.set({ ...apartmentData });
   }
 }

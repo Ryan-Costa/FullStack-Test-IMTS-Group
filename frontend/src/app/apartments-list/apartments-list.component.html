@@ -132,6 +132,7 @@
                     />
                 </td>
             </tr>
+            
         </ng-template>
 
         <ng-template pTemplate="emptymessage">
@@ -143,7 +144,23 @@
 </div>
 </div>
 
-<app-modal-create-apartment [visible]="modalCreateVisible" (onCreate)="createApartment($event)" (onClose)="closeModal()"></app-modal-create-apartment>
-<app-modal-update-apartment [visible]="modalEditApartmentVisible()" (onEdit)="updateApartment($event)" (onClose)="closeModal()"></app-modal-update-apartment>
+<app-modal-create-apartment 
+    [visible]="modalCreateVisible" 
+    (onCreate)="createApartment($event)" 
+    (onClose)="closeModal()"
+></app-modal-create-apartment>
 
-<app-modal-create-vehicle [visible]="modalAddVehicleVisible()" [apartmentNumber]="apartmentNumber()" (onClose)="closeModal()"></app-modal-create-vehicle>
+<app-modal-update-apartment 
+    [visible]="modalEditApartmentVisible()" 
+    (onEdit)="updateApartment($event)" 
+    (onClose)="closeModal()"
+></app-modal-update-apartment>
+
+<app-modal-create-vehicle 
+    [visible]="modalAddVehicleVisible()" 
+    (onCreate)="createVehicle($event, apartmentNumber())" 
+    [apartmentNumber]="apartmentNumber()" 
+    [apartmentId]="apartmentId()" 
+    (onClose)="closeModal()"
+></app-modal-create-vehicle>
+

@@ -66,6 +66,7 @@ export class ApartamentsListComponent implements OnInit {
   modalAddVehicleVisible = this.modalCreateVehicleService.modalAddVisible;
 
   apartmentNumber: WritableSignal<string> = signal('');
+  apartmentId: WritableSignal<string> = signal('');
 
   constructor(private router: Router) {}
 
@@ -90,6 +91,16 @@ export class ApartamentsListComponent implements OnInit {
       next: () => {
         alert('Apartamento criado');
         this.getApartments();
+      },
+      error: (error) => console.error('Error:', error),
+    });
+  }
+
+  createVehicle(vehicle: VehicleCreate, apartmentNumber: string): void {
+    console.log(vehicle);
+    this.vehiclesService.createVehicle(vehicle).subscribe({
+      next: () => {
+        alert(`Veiculo adicionado ao apartamento ${apartmentNumber}`);
       },
       error: (error) => console.error('Error:', error),
     });
@@ -131,8 +142,9 @@ export class ApartamentsListComponent implements OnInit {
     event: MouseEvent
   ): void {
     event.stopPropagation();
-    this.modalCreateVehicleService.openModal(apartmentId, apartmentNumber);
+    this.modalCreateVehicleService.openModal();
     this.apartmentNumber.set(apartmentNumber);
+    this.apartmentId.set(apartmentId);
   }
 
   editApartment(apartment: ApartmentEdit, event: MouseEvent): void {

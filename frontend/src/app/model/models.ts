@@ -30,6 +30,14 @@ export type VehicleCreate = {
   model: string;
   color: string;
   plate: string;
+  apartment_id: number;
+};
+
+export type VehiclePost = {
+  brand: string;
+  model: string;
+  color: string;
+  plate: string;
   apartmentId: number;
 };
 
