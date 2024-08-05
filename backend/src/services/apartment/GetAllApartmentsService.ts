@@ -5,7 +5,9 @@ export class GetAllApartmentService {
   async execute(): Promise<Apartment[]> {
     const repo = AppDataSource.getRepository(Apartment);
 
-    const apartments = await repo.find();
+    const apartments = await repo.find({
+      relations: ["vehicles"],
+    });
 
     return apartments;
   }

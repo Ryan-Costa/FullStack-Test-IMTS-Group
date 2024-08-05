@@ -98,7 +98,7 @@
                         [rounded]="true" 
                         [outlined]="true" 
                         severity="success" 
-                        (onClick)="updateVahicle(vehicle)" 
+                        (onClick)="editVehicle(vehicle, $event)" 
                     />
                     <p-button 
                         icon="pi pi-trash" 
@@ -120,4 +120,8 @@
 </div>
 </div>
 
-<!-- <app-modal [visible]="modalVisible" (onCreate)="createVehicle($event)" (onClose)="closeModal()"></app-modal> -->
+<app-modal-update-vehicle 
+    [visible]="modalEditVehicleVisible()" 
+    (onEdit)="updateVehicle($event)" 
+    (onClose)="closeModal()"
+    ></app-modal-update-vehicle>

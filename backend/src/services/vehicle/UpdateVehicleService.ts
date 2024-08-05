@@ -8,7 +8,7 @@ type VehicleRequest = {
   model: string;
   color: string;
   plate: string;
-  apartment_id: number;
+  // apartment_id: number;
 };
 
 export class UpdateVehicleService {
@@ -18,8 +18,8 @@ export class UpdateVehicleService {
     model,
     color,
     plate,
-    apartment_id,
-  }: VehicleRequest): Promise<Vehicle | Error> {
+  }: // apartment_id,
+  VehicleRequest): Promise<Vehicle | Error> {
     const vehicleRepo = AppDataSource.getRepository(Vehicle);
     const apartmentRepo = AppDataSource.getRepository(Apartment);
 
@@ -36,17 +36,17 @@ export class UpdateVehicleService {
       }
     }
 
-    if (apartment_id !== undefined) {
-      const apartment = await apartmentRepo.findOne({
-        where: { id: apartment_id },
-      });
+    // if (apartment_id !== undefined) {
+    //   const apartment = await apartmentRepo.findOne({
+    //     where: { id: apartment_id },
+    //   });
 
-      if (!apartment) {
-        return new Error(`Apartment does not exist`);
-      }
+    //   if (!apartment) {
+    //     return new Error(`Apartment does not exist`);
+    //   }
 
-      vehicle.apartment = apartment;
-    }
+    //   vehicle.apartment = apartment;
+    // }
 
     if (brand !== undefined) vehicle.brand = brand;
     if (model !== undefined) vehicle.model = model;

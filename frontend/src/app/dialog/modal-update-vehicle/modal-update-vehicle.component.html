@@ -1,0 +1,33 @@
+<div class="modal-overlay" [class.show]="visible" (click)="closeModal()"></div>
+    <div class="modal-content" [class.show]="visible">
+        <div class="modal-header">
+            <h2>Editar Veículo {{vehicleEdit.model}}</h2>
+            <button (click)="closeModal()"><i class="pi pi-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="block-ap">
+                <p-floatLabel>
+                    <input pInputText id="brand" [(ngModel)]="vehicleEdit.brand" />
+                    <label for="brand">Marca:</label>
+                </p-floatLabel>
+    
+                <p-floatLabel>
+                    <input pInputText id="model" [(ngModel)]="vehicleEdit.model" />
+                    <label for="model">Modelo:</label>
+                </p-floatLabel>
+            </div>
+
+            <p-floatLabel>
+                <input pInputText id="color" [(ngModel)]="vehicleEdit.color" />
+                <label for="color">Cor:</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="plate" [(ngModel)]="vehicleEdit.plate" mask="AAA-0000" />
+                <label for="plate">Placa:</label>
+            </p-floatLabel>
+        </div>
+        <div class="modal-footer">
+            <button (click)="updateVehicle()">Editar</button>
+        </div>
+    </div>

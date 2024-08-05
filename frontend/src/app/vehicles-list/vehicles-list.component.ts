@@ -13,8 +13,10 @@ import { TableModule } from 'primeng/table';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { VehicleCreate, VehicleRequest } from '../model/models';
+import { VehicleCreate, VehicleEdit, VehicleRequest } from '../model/models';
 import { DialogModule } from 'primeng/dialog';
+import { ModalUpdateVehicleService } from '../dialog/modal-update-vehicle/modal-update-vehicle.service';
+import { ModalUpdateVehicleComponent } from '../dialog/modal-update-vehicle/modal-update-vehicle.component';
 // import { ModalCreateVehicleComponent } from '../modal-create-vehicle/modal-create-vehicle.component';
 
 @Component({
@@ -28,7 +30,7 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,
     InputTextModule,
     DialogModule,
-    // ModalCreateVehicleComponent,
+    ModalUpdateVehicleComponent,
   ],
   templateUrl: './vehicles-list.component.html',
   styleUrl: './vehicles-list.component.scss',
@@ -39,6 +41,9 @@ export class VehiclesListComponent implements OnInit {
   modalVisible: boolean = false;
 
   vehiclesService = inject(VehiclesService);
+  modalUpdateVehicleService = inject(ModalUpdateVehicleService);
+
+  modalEditVehicleVisible = this.modalUpdateVehicleService.modalEditVisible;
   $vehicles: VehicleRequest[] = [];
 
   ngOnInit(): void {
@@ -55,7 +60,14 @@ export class VehiclesListComponent implements OnInit {
     });
   }
 
-  updateVahicle(vehicle: any): void {
+  updateVehicle(vehicle: VehicleEdit): void {
+    this.vehiclesService.updateVehicle(vehicle).subscribe({
+      next: () => {
+        alert('Veículo atualizado!');
+        this.getVehicles();
+      },
+      error: (error) => console.error('Error:', error),
+    });
     console.log('edit vehicle', vehicle);
   }
 
@@ -67,6 +79,11 @@ export class VehiclesListComponent implements OnInit {
       },
       error: (error) => console.error('Error:', error),
     });
+  }
+
+  editVehicle(vehicle: VehicleEdit, event: MouseEvent): void {
+    event.stopPropagation();
+    this.modalUpdateVehicleService.openModal(vehicle);
   }
 
   formatDate(date: string): Date {

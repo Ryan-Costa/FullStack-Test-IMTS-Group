@@ -80,6 +80,7 @@ export class ApartamentsListComponent implements OnInit {
   getApartments(): void {
     this.apartamentsService.getApartments().subscribe({
       next: (apartments) => {
+        console.log(apartments);
         this.$apartments = apartments ?? [];
       },
       error: (error) => console.error('Error:', error),

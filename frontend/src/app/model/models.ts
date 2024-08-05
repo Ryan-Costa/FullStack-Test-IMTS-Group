@@ -18,7 +18,15 @@ export type VehicleRequest = {
   };
 };
 
-export type VehicleWithoutApId = {
+export type VehicleWithoutTimestemp = {
+  brand: string;
+  model: string;
+  color: string;
+  plate: string;
+};
+
+export type VehicleEditWithoutTimestemp = {
+  id: string;
   brand: string;
   model: string;
   color: string;
@@ -33,20 +41,12 @@ export type VehicleCreate = {
   apartment_id: number;
 };
 
-export type VehiclePost = {
-  brand: string;
-  model: string;
-  color: string;
-  plate: string;
-  apartmentId: number;
-};
-
 export type VehicleEdit = {
+  id: number;
   brand: string;
   model: string;
   color: string;
   plate: string;
-  apartmentId: string;
 };
 
 export type ApartmentRequest = {
@@ -58,6 +58,15 @@ export type ApartmentRequest = {
   email?: string | null;
   createdAt: Date;
   updatedAt: Date;
+  vehicles: {
+    id: number;
+    brand: string;
+    model: string;
+    color: string;
+    plate: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
 };
 
 export type ApartmentRequestWithoutTimestemp = {

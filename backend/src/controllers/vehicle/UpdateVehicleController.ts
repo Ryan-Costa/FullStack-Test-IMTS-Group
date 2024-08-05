@@ -5,7 +5,7 @@ import { ValidatePlateService } from "../../services/vehicle/ValidatePlateServic
 export class UpdateVehicleController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
-    const { brand, model, color, plate, apartment_id } = request.body;
+    const { brand, model, color, plate } = request.body;
 
     const plateValidate = new ValidatePlateService();
 
@@ -23,7 +23,7 @@ export class UpdateVehicleController {
       model,
       color,
       plate,
-      apartment_id: apartment_id ? Number(apartment_id) : undefined,
+      // apartment_id: apartment_id ? Number(apartment_id) : undefined,
     });
 
     if (result instanceof Error) {

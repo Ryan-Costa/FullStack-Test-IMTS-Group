@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { VehicleCreate, VehicleRequest } from '../model/models';
+import { VehicleCreate, VehicleEdit, VehicleRequest } from '../model/models';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -21,16 +21,11 @@ export class VehiclesService {
     return this.http.post<VehicleCreate>(this.apiUrl, vehicle);
   }
 
-  updateVehicle(vehicle: VehicleRequest) {
-    return this.http.put<VehicleRequest>(
-      `${this.apiUrl}/${vehicle.id}`,
-      vehicle
-    );
+  updateVehicle(vehicle: VehicleEdit) {
+    return this.http.put<VehicleEdit>(`${this.apiUrl}/${vehicle.id}`, vehicle);
   }
 
   deleteVehicle(vehicleId: string) {
     return this.http.delete<VehicleRequest>(`${this.apiUrl}/${vehicleId}`);
   }
-
-  // openModalAddVehicle();
 }
