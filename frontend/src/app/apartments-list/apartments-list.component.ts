@@ -80,7 +80,6 @@ export class ApartamentsListComponent implements OnInit {
   getApartments(): void {
     this.apartamentsService.getApartments().subscribe({
       next: (apartments) => {
-        console.log(apartments);
         this.$apartments = apartments ?? [];
       },
       error: (error) => console.error('Error:', error),
@@ -134,7 +133,6 @@ export class ApartamentsListComponent implements OnInit {
 
   newApartment(): void {
     this.modalCreateVisible = true;
-    console.log('new apartment');
   }
 
   addVehicle(
@@ -161,8 +159,8 @@ export class ApartamentsListComponent implements OnInit {
     return makeStateKey(phone);
   }
 
-  onRowClick(id: number) {
-    this.router.navigate(['/apartment', id]);
-    console.log('Clicado no apartamento com ID:', id);
-  }
+  // onRowClick(id: number) {
+  //   this.router.navigate(['/apartment', id]);
+  //   console.log('Clicado no apartamento com ID:', id);
+  // }
 }

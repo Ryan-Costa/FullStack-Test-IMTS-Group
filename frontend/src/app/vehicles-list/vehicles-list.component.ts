@@ -68,7 +68,6 @@ export class VehiclesListComponent implements OnInit {
       },
       error: (error) => console.error('Error:', error),
     });
-    console.log('edit vehicle', vehicle);
   }
 
   deleteVehicle(vehicleId: any): void {
