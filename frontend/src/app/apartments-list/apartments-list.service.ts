@@ -6,7 +6,7 @@ import {
   ApartmentRequestWithoutTimestemp,
   VehicleCreate,
 } from '../model/models';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
